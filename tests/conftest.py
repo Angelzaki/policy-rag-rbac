@@ -15,4 +15,5 @@ def rag() -> PolicyRag:
         docs_dir=ROOT / "samples" / "policies",
         acl_path=ROOT / "samples" / "acl.json",
         roles_path=ROOT / "samples" / "roles.json",
+        classifications_path=ROOT / "samples" / "classifications.json",
     )

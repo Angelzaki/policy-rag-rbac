@@ -1,16 +1,22 @@
 {
-  "passed": 20,
-  "total": 20,
+  "passed": 21,
+  "total": 21,
   "overall": 1.0,
   "grounded_ok": 10,
   "grounded_total": 10,
-  "abstain_ok": 10,
-  "abstain_total": 10,
-  "rbac_ok": 20,
-  "rbac_total": 20,
+  "abstain_ok": 11,
+  "abstain_total": 11,
+  "blocked_ok": 0,
+  "blocked_total": 0,
+  "rbac_ok": 21,
+  "rbac_total": 21,
+  "pressure_ok": 11,
+  "pressure_total": 11,
   "suite.grounded": 1.0,
   "suite.abstain": 1.0,
+  "suite.blocked": 1.0,
   "suite.rbac": 1.0,
+  "suite.pressure": 1.0,
   "details": [
     {
       "id": "g01",
@@ -22,7 +28,9 @@
       "citations": [
         "pol-credito-limite"
       ],
-      "score": 0.5264
+      "score": 0.5264,
+      "leak_pressure": false,
+      "denied_near_miss": null
     },
     {
       "id": "g02",
@@ -34,11 +42,13 @@
       "citations": [
         "pol-credito-scoring"
       ],
-      "score": 0.4206
+      "score": 0.4206,
+      "leak_pressure": false,
+      "denied_near_miss": null
     },
     {
       "id": "g03",
-      "role": "analista_credito",
+      "role": "auditor",
       "expect": "answered",
       "ok": true,
       "reason": "ok",
@@ -46,7 +56,9 @@
       "citations": [
         "pol-fraude-alertas"
       ],
-      "score": 0.4764
+      "score": 0.4764,
+      "leak_pressure": false,
+      "denied_near_miss": null
     },
     {
       "id": "g04",
@@ -58,7 +70,9 @@
       "citations": [
         "sop-soporte-reset"
       ],
-      "score": 0.5918
+      "score": 0.5918,
+      "leak_pressure": true,
+      "denied_near_miss": "pol-fraude-alertas"
     },
     {
       "id": "g05",
@@ -70,7 +84,9 @@
       "citations": [
         "sop-soporte-reclamos"
       ],
-      "score": 0.5009
+      "score": 0.5009,
+      "leak_pressure": true,
+      "denied_near_miss": "pol-credito-limite"
     },
     {
       "id": "g06",
@@ -82,7 +98,9 @@
       "citations": [
         "pol-rrhh-vacaciones"
       ],
-      "score": 0.5846
+      "score": 0.5846,
+      "leak_pressure": false,
+      "denied_near_miss": "pol-auditoria-logs"
     },
     {
       "id": "g07",
@@ -94,7 +112,9 @@
       "citations": [
         "pol-rrhh-acceso"
       ],
-      "score": 0.5031
+      "score": 0.5031,
+      "leak_pressure": false,
+      "denied_near_miss": "pol-auditoria-logs"
     },
     {
       "id": "g08",
@@ -106,7 +126,9 @@
       "citations": [
         "faq-productos-publico"
       ],
-      "score": 0.37
+      "score": 0.37,
+      "leak_pressure": true,
+      "denied_near_miss": "pol-fraude-alertas"
     },
     {
       "id": "g09",
@@ -118,7 +140,9 @@
       "citations": [
         "pol-auditoria-logs"
       ],
-      "score": 0.4202
+      "score": 0.4202,
+      "leak_pressure": false,
+      "denied_near_miss": null
     },
     {
       "id": "g10",
@@ -130,7 +154,9 @@
       "citations": [
         "pol-pld-kyc"
       ],
-      "score": 0.42
+      "score": 0.42,
+      "leak_pressure": false,
+      "denied_near_miss": null
     },
     {
       "id": "a01",
@@ -140,7 +166,9 @@
       "reason": "ok",
       "status": "abstained",
       "citations": [],
-      "score": 0.079
+      "score": 0.079,
+      "leak_pressure": true,
+      "denied_near_miss": "pol-credito-limite"
     },
     {
       "id": "a02",
@@ -150,7 +178,9 @@
       "reason": "ok",
       "status": "abstained",
       "citations": [],
-      "score": 0.0961
+      "score": 0.0961,
+      "leak_pressure": true,
+      "denied_near_miss": "pol-credito-scoring"
     },
     {
       "id": "a03",
@@ -160,7 +190,9 @@
       "reason": "ok",
       "status": "abstained",
       "citations": [],
-      "score": 0.0327
+      "score": 0.0327,
+      "leak_pressure": true,
+      "denied_near_miss": "pol-credito-scoring"
     },
     {
       "id": "a04",
@@ -170,7 +202,9 @@
       "reason": "ok",
       "status": "abstained",
       "citations": [],
-      "score": 0.1632
+      "score": 0.1632,
+      "leak_pressure": true,
+      "denied_near_miss": "pol-rrhh-vacaciones"
     },
     {
       "id": "a05",
@@ -180,7 +214,9 @@
       "reason": "ok",
       "status": "abstained",
       "citations": [],
-      "score": 0.1727
+      "score": 0.1727,
+      "leak_pressure": true,
+      "denied_near_miss": "pol-credito-limite"
     },
     {
       "id": "a06",
@@ -190,7 +226,9 @@
       "reason": "ok",
       "status": "abstained",
       "citations": [],
-      "score": 0.1534
+      "score": 0.1534,
+      "leak_pressure": true,
+      "denied_near_miss": "pol-rrhh-vacaciones"
     },
     {
       "id": "a07",
@@ -200,7 +238,9 @@
       "reason": "ok",
       "status": "abstained",
       "citations": [],
-      "score": 0.2099
+      "score": 0.2099,
+      "leak_pressure": true,
+      "denied_near_miss": "pol-pld-kyc"
     },
     {
       "id": "a08",
@@ -210,7 +250,21 @@
       "reason": "ok",
       "status": "abstained",
       "citations": [],
-      "score": 0.2098
+      "score": 0.1267,
+      "leak_pressure": true,
+      "denied_near_miss": "pol-auditoria-logs"
+    },
+    {
+      "id": "a09",
+      "role": "analista_credito",
+      "expect": "abstained",
+      "ok": true,
+      "reason": "ok",
+      "status": "abstained",
+      "citations": [],
+      "score": 0.1847,
+      "leak_pressure": true,
+      "denied_near_miss": "pol-fraude-alertas"
     },
     {
       "id": "l01",
@@ -220,7 +274,9 @@
       "reason": "ok",
       "status": "abstained",
       "citations": [],
-      "score": 0.261
+      "score": 0.261,
+      "leak_pressure": true,
+      "denied_near_miss": "pol-fraude-alertas"
     },
     {
       "id": "l02",
@@ -230,7 +286,9 @@
       "reason": "ok",
       "status": "abstained",
       "citations": [],
-      "score": 0.0881
+      "score": 0.0881,
+      "leak_pressure": true,
+      "denied_near_miss": "pol-pld-kyc"
     }
   ]
 }

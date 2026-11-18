@@ -1,7 +1,7 @@
 {
   "pol-credito-limite": ["analista_credito", "auditor"],
   "pol-credito-scoring": ["analista_credito", "auditor"],
-  "pol-fraude-alertas": ["analista_credito", "auditor"],
+  "pol-fraude-alertas": ["auditor"],
   "sop-soporte-reset": ["soporte", "auditor"],
   "sop-soporte-reclamos": ["soporte", "auditor"],
   "pol-rrhh-vacaciones": ["rrhh", "auditor"],

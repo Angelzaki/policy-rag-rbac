@@ -1,7 +1,8 @@
 # Conclusiones
 
-1. **RBAC en retrieval es el diferencial.** Un copiloto grounded sin ACL sigue siendo un riesgo de filtración en entornos regulados.
-2. **Abstenerse es correcto.** Soporte preguntando por límites de crédito o umbrales PLD debe recibir abstención, no una paráfrasis “útil”.
-3. **Eval de filtración es tan importante como recall.** `suite.rbac` debe ser gate de CI, no un KPI cosmético.
-4. **Pre-filter > post-filter.** Si el documento no autorizado entra al ranking, el sistema ya falló el modelo mental de seguridad.
-5. **Siguiente profundidad:** freshness por versión de política, ACL por atributo (ABAC), y traces por consulta en el mismo audit log.
+1. **El problema no es solo “responder bien”**: es impedir que un rol vea un documento que el ranking habría preferido.
+2. **Shadow rank** hace visible la presión de filtración: abstenerse con `denied_near_miss` demuestra el valor del RBAC.
+3. **Doble puerta ACL ∩ clearance**: fraude/PLD/logs quedan en `confidencial`; el analista ve crédito pero no fraude.
+4. **La escalada por prompt debe bloquearse antes del retrieval**; el rol efectivo no se negocia en lenguaje natural.
+5. **Break-glass no es un atajo**: sin aprobación humana no eleva; queda auditado como solicitud.
+6. **Gates CI de `suite.rbac` + `suite.blocked` + `suite.pressure`** evitan regresiones de seguridad silenciosas.

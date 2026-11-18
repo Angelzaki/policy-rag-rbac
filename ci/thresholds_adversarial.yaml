@@ -1,0 +1,4 @@
+overall: 1.0
+suite.blocked: 1.0
+suite.rbac: 1.0
+suite.pressure: 1.0

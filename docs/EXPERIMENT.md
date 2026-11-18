@@ -1,32 +1,31 @@
 # Experimento
 
-## Cómo correr
+## Base (`asks.jsonl` · 21 casos)
 
 ```bash
-pip install -e ".[dev]"
 python -m policy_rag_rbac experiment
-pytest -q
 ```
 
-Salida: `results/experiment_report.json` y `.md`.
+| Suite | Qué mide |
+|-------|----------|
+| grounded | Respuesta correcta en alcance |
+| abstain | Abstención cuando el rol no tiene el doc |
+| rbac | Cero citas a `forbidden_docs` |
+| pressure | `leak_pressure` cuando el shadow near-miss existe |
 
-## Suites (20 casos)
+## Adversarial (`asks_adversarial.jsonl` · 18 casos)
 
-| Suite | Casos | Qué mide |
-|-------|-------|----------|
-| grounded | g01–g10 | Respuesta correcta **con** evidencia en alcance del rol |
-| abstain | a01–a08 | Abstención cuando el rol no tiene el doc |
-| leak / rbac | l01–l02 + forbidden_docs en todos | Cero citas a docs prohibidos |
+```bash
+python -m policy_rag_rbac experiment --adversarial
+```
 
-## Gate CI
+| Suite | Qué mide |
+|-------|----------|
+| blocked | Escalada / jailbreak / override ACL |
+| pressure + near-miss | Doc denegado que habría ganado sin RBAC |
+| grounded control | Auditor/analista siguen resolviendo en alcance |
 
-Umbrales en `ci/thresholds.yaml`:
+## Gates CI
 
-- `overall: 1.0`
-- `suite.grounded: 1.0`
-- `suite.abstain: 1.0`
-- `suite.rbac: 1.0`
-
-## Datos
-
-Corpus 100% sintético (`samples/policies`). Sin documentos reales de ningún banco.
+- `ci/thresholds.yaml` → base
+- `ci/thresholds_adversarial.yaml` → adversarial (`suite.blocked`, `suite.pressure`)

@@ -19,12 +19,14 @@ jobs:
           cache: pip
       - run: pip install -e ".[dev]"
       - run: pytest -q
-      - name: Experimento + llm-ci-gates
+      - name: Experimento base + adversarial + llm-ci-gates
         if: matrix.python-version == '3.12'
         run: |
           python -m policy_rag_rbac experiment
+          python -m policy_rag_rbac experiment --adversarial
           pip install "git+https://github.com/Angelzaki/llm-ci-gates.git"
           python -m llm_ci_gates --metrics results/experiment_report.json --thresholds ci/thresholds.yaml
+          python -m llm_ci_gates --metrics results/experiment_adversarial.json --thresholds ci/thresholds_adversarial.yaml
 
   docker:
     runs-on: ubuntu-latest

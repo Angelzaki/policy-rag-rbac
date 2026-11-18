@@ -18,6 +18,7 @@ RAG = PolicyRag(
     docs_dir=ROOT / "samples" / "policies",
     acl_path=ROOT / "samples" / "acl.json",
     roles_path=ROOT / "samples" / "roles.json",
+    classifications_path=ROOT / "samples" / "classifications.json",
 )
 AUDIT = AuditLog(DATA_DIR / "audit.json")
 TEMPLATES = Jinja2Templates(directory=str(ROOT / "templates"))
@@ -46,9 +47,20 @@ def home(request: Request):
 
 
 @app.post("/ask", response_class=HTMLResponse)
-def ask(request: Request, question: str = Form(...), role: str = Form("soporte")):
+def ask(
+    request: Request,
+    question: str = Form(...),
+    role: str = Form("soporte"),
+    break_glass: str = Form(""),
+    reason: str = Form(""),
+):
     try:
-        result = RAG.ask(question, role)
+        result = RAG.ask(
+            question,
+            role,
+            break_glass=break_glass in {"1", "on", "true", "yes"},
+            break_glass_reason=reason,
+        )
     except ValueError as exc:
         result = {
             "answer": str(exc),
@@ -72,9 +84,9 @@ def clear():
 
 
 @app.get("/api/ask")
-def api_ask(q: str, role: str = "soporte"):
+def api_ask(q: str, role: str = "soporte", break_glass: bool = False, reason: str = ""):
     try:
-        result = RAG.ask(q, role)
+        result = RAG.ask(q, role, break_glass=break_glass, break_glass_reason=reason)
     except ValueError as exc:
         return JSONResponse({"error": str(exc)}, status_code=400)
     AUDIT.add({"question": q, **result})
@@ -87,6 +99,7 @@ def api_roles():
     for role in sorted(RAG.roles):
         out[role] = {
             "label": RAG.roles[role].get("label"),
+            "clearance": RAG.roles[role].get("clearance"),
             "docs": [d["id"] for d in RAG.docs_for_role(role)],
         }
     return JSONResponse(out)
@@ -99,4 +112,9 @@ def api_stats():
 
 @app.get("/health")
 def health():
-    return {"status": "ok", "docs": len(RAG.docs), "roles": sorted(RAG.roles)}
+    return {
+        "status": "ok",
+        "docs": len(RAG.docs),
+        "roles": sorted(RAG.roles),
+        "layers": ["acl", "clearance", "guard", "shadow_rank"],
+    }

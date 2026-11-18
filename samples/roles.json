@@ -2,22 +2,27 @@
   "roles": {
     "analista_credito": {
       "label": "Analista de crédito",
-      "description": "Políticas de crédito, scoring y fraude. Sin acceso a RRHH ni auditoría plena."
+      "clearance": 2,
+      "description": "Políticas de crédito y fraude. Sin RRHH ni auditoría plena."
     },
     "soporte": {
       "label": "Soporte",
-      "description": "SOPs de atención y FAQ pública. Sin políticas de crédito ni PLD."
+      "clearance": 1,
+      "description": "SOPs de atención y FAQ pública. Sin crédito ni PLD."
     },
     "rrhh": {
       "label": "RRHH",
+      "clearance": 2,
       "description": "Políticas de personal. Sin crédito ni fraude."
     },
     "auditor": {
       "label": "Auditor",
-      "description": "Lectura amplia de políticas para revisión de cumplimiento."
+      "clearance": 3,
+      "description": "Lectura amplia para cumplimiento (máximo clearance)."
     },
     "publico": {
       "label": "Público / canal",
+      "clearance": 0,
       "description": "Solo FAQ de productos. Sin políticas internas."
     }
   }

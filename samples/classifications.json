@@ -1,0 +1,12 @@
+{
+  "faq-productos-publico": {"level": 0, "label": "publica"},
+  "sop-soporte-reset": {"level": 1, "label": "interna"},
+  "sop-soporte-reclamos": {"level": 1, "label": "interna"},
+  "pol-rrhh-vacaciones": {"level": 2, "label": "restringida"},
+  "pol-rrhh-acceso": {"level": 2, "label": "restringida"},
+  "pol-credito-limite": {"level": 2, "label": "restringida"},
+  "pol-credito-scoring": {"level": 2, "label": "restringida"},
+  "pol-fraude-alertas": {"level": 3, "label": "confidencial"},
+  "pol-pld-kyc": {"level": 3, "label": "confidencial"},
+  "pol-auditoria-logs": {"level": 3, "label": "confidencial"}
+}

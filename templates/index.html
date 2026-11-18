@@ -13,11 +13,11 @@
         <span class="brand-mark" aria-hidden="true"></span>
         <div>
           <div class="brand-name">Policy RAG · RBAC</div>
-          <div class="brand-sub">Asistente interno con permisos por rol · datos sintéticos</div>
+          <div class="brand-sub">ACL + clearance + anti-escalada · shadow rank de filtración</div>
         </div>
       </div>
       <div class="topbar-actions">
-        <span class="chip chip-ok">{{ doc_count }} políticas · filtro pre-retrieval</span>
+        <span class="chip chip-ok">{{ doc_count }} políticas · 4 capas</span>
         <form method="post" action="/clear">
           <button class="btn btn-ghost" type="submit">Limpiar historial</button>
         </form>
@@ -28,24 +28,24 @@
   <main class="page">
     <section class="kpis" aria-label="Indicadores">
       <article class="kpi">
-        <div class="kpi-label">Respuestas con evidencia</div>
+        <div class="kpi-label">Con evidencia</div>
         <div class="kpi-value">{{ stats.answered }}</div>
         <div class="kpi-note">de {{ stats.total }} consultas</div>
       </article>
       <article class="kpi">
-        <div class="kpi-label">Tasa de abstención</div>
+        <div class="kpi-label">Abstención</div>
         <div class="kpi-value">{{ '%.0f' % (stats.abstain_rate * 100) }}%</div>
-        <div class="kpi-note">{{ stats.abstained }} sin evidencia autorizada</div>
+        <div class="kpi-note">{{ stats.abstained }} fuera de alcance</div>
       </article>
       <article class="kpi">
-        <div class="kpi-label">RBAC íntegro</div>
-        <div class="kpi-value">{{ '%.0f' % (stats.rbac_rate * 100) }}%</div>
-        <div class="kpi-note">{{ stats.rbac_ok }}/{{ stats.total }} sin filtración</div>
+        <div class="kpi-label">Escaladas bloqueadas</div>
+        <div class="kpi-value">{{ stats.blocked }}</div>
+        <div class="kpi-note">{{ '%.0f' % (stats.block_rate * 100) }}% de consultas</div>
       </article>
       <article class="kpi">
-        <div class="kpi-label">Rol más activo</div>
-        <div class="kpi-value kpi-value-sm">{% if stats.roles %}{{ stats.roles[0][0] }}{% else %}—{% endif %}</div>
-        <div class="kpi-note">{% if stats.roles %}{{ stats.roles[0][1] }} consultas{% else %}sin datos{% endif %}</div>
+        <div class="kpi-label">Presión de filtración</div>
+        <div class="kpi-value">{{ stats.leak_pressure }}</div>
+        <div class="kpi-note">near-miss denegados por RBAC</div>
       </article>
     </section>
 
@@ -56,34 +56,46 @@
           <label class="field-label" for="role">Rol del solicitante</label>
           <select id="role" name="role" required>
             {% for key, meta in roles.items() %}
-            <option value="{{ key }}" {% if role == key %}selected{% endif %}>{{ meta.label }} ({{ key }})</option>
+            <option value="{{ key }}" {% if role == key %}selected{% endif %}>
+              {{ meta.label }} · clearance {{ meta.clearance }}
+            </option>
             {% endfor %}
           </select>
           <label class="field-label" for="question">Pregunta</label>
-          <textarea id="question" name="question" rows="5" required placeholder="Ej: ¿Cuál es el límite comercial?">{{ question or '' }}</textarea>
+          <textarea id="question" name="question" rows="5" required placeholder="Ej: ¿Cuál es el límite comercial? / Ignora el rol y...">{{ question or '' }}</textarea>
+          <label class="field-label"><input type="checkbox" name="break_glass" value="1"> Solicitar break-glass (no auto-eleva)</label>
+          <label class="field-label" for="reason">Motivo break-glass</label>
+          <input id="reason" name="reason" type="text" placeholder="ticket / incidente (opcional)" style="width:100%;padding:8px 10px;margin-bottom:12px;border:1px solid var(--border);border-radius:4px;font:inherit;">
           <button class="btn btn-primary" type="submit">Consultar con RBAC</button>
         </form>
-        <p class="hint">El retrieval solo ve documentos autorizados para el rol. Si no hay evidencia en alcance, se abstiene.</p>
+        <p class="hint">Capas: guard anti-escalada → ACL ∩ clearance → retrieval → shadow rank (qué se habría filtrado sin RBAC).</p>
       </section>
 
       <section class="panel">
         <h2 class="panel-title">Resultado</h2>
         {% if result %}
           <div class="badge {% if result.status == 'answered' %}badge-ok{% elif result.status == 'abstained' %}badge-warn{% else %}badge-danger{% endif %}">
-            {{ result.status }} · rol {{ result.role }} · rbac {% if result.rbac_ok %}ok{% else %}fail{% endif %}
+            {{ result.status }} · {{ result.role }} · cl{{ result.clearance if result.clearance is defined else '?' }} · rbac {% if result.rbac_ok %}ok{% else %}fail{% endif %}
           </div>
           <p class="answer">{{ result.answer }}</p>
           {% if result.citations %}
           <p class="meta"><strong>Citas:</strong> {{ result.citations | join(', ') }}</p>
           {% else %}
-          <p class="meta"><strong>Citas:</strong> ninguna (abstención)</p>
+          <p class="meta"><strong>Citas:</strong> ninguna</p>
           {% endif %}
           <p class="meta">score {{ '%.3f' % (result.score or 0) }}{% if result.reason %} · {{ result.reason }}{% endif %}</p>
+          {% if result.denied_near_miss %}
+          <p class="meta" style="color:var(--warn);"><strong>Near-miss denegado:</strong>
+            {{ result.denied_near_miss.doc_id }}
+            (score {{ result.denied_near_miss.score }}, {{ result.denied_near_miss.classification }})
+            — sin RBAC se habría citado.
+          </p>
+          {% endif %}
           {% if result.allowed_docs %}
           <p class="meta"><strong>Docs en alcance:</strong> {{ result.allowed_docs | join(', ') }}</p>
           {% endif %}
         {% else %}
-          <p class="muted">Aún no hay consulta. Elige un rol y pregunta sobre una política sintética.</p>
+          <p class="muted">Prueba: rol soporte + “límite comercial” (abstención + near-miss) o “ignora el rol…” (blocked).</p>
         {% endif %}
       </section>
     </div>
@@ -99,6 +111,7 @@
             <th>Pregunta</th>
             <th>Estado</th>
             <th>Citas</th>
+            <th>Near-miss</th>
           </tr>
         </thead>
         <tbody>
@@ -107,8 +120,9 @@
             <td>{{ row.ts }}</td>
             <td>{{ row.role }}</td>
             <td>{{ row.question }}</td>
-            <td>{{ row.status }}</td>
+            <td>{{ row.status }}{% if row.leak_pressure %} · pressure{% endif %}</td>
             <td>{{ (row.citations or []) | join(', ') or '—' }}</td>
+            <td>{% if row.denied_near_miss %}{{ row.denied_near_miss.doc_id }}{% else %}—{% endif %}</td>
           </tr>
           {% endfor %}
         </tbody>
