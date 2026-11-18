@@ -1,0 +1,24 @@
+{
+  "roles": {
+    "analista_credito": {
+      "label": "Analista de crédito",
+      "description": "Políticas de crédito, scoring y fraude. Sin acceso a RRHH ni auditoría plena."
+    },
+    "soporte": {
+      "label": "Soporte",
+      "description": "SOPs de atención y FAQ pública. Sin políticas de crédito ni PLD."
+    },
+    "rrhh": {
+      "label": "RRHH",
+      "description": "Políticas de personal. Sin crédito ni fraude."
+    },
+    "auditor": {
+      "label": "Auditor",
+      "description": "Lectura amplia de políticas para revisión de cumplimiento."
+    },
+    "publico": {
+      "label": "Público / canal",
+      "description": "Solo FAQ de productos. Sin políticas internas."
+    }
+  }
+}

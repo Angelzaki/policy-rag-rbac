@@ -1,0 +1,8 @@
+POL-PLD-KYC · Conocimiento del cliente y PLD (sintética)
+Clasificación: confidencial · cumplimiento
+
+Todo cliente nuevo debe completar KYC con documento de identidad vigente y declaración de fondos.
+Las operaciones inusuales se reportan al oficial de cumplimiento según el umbral interno.
+Está prohibido omitir el KYC para acelerar un desembolso de crédito.
+Los umbrales de monitoreo de lavado de activos no se comparten con soporte ni con el canal público.
+El oficial de cumplimiento conserva el registro de reportes por el plazo normativo aplicable.

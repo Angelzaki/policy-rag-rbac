@@ -1,0 +1,8 @@
+SOP-SOPORTE-RESET · Restablecimiento de contraseña (sintético)
+Clasificación: operativa · soporte
+
+Para restablecer la contraseña el cliente debe verificar identidad con DNI y pregunta de seguridad.
+El enlace de reset expira en 15 minutos y solo puede usarse una vez.
+Si el cliente supera tres intentos fallidos, la cuenta se bloquea temporalmente por 2 horas.
+Soporte no debe solicitar ni registrar la nueva contraseña del cliente.
+Tras el reset exitoso, se envía un correo de confirmación al correo registrado.

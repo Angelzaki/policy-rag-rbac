@@ -1,0 +1,8 @@
+POL-CREDITO-LIMITE · Política de límites comerciales (sintética)
+Clasificación: interna · crédito
+
+El límite comercial estándar para persona natural es 15 000 soles sin garantía adicional.
+Si la solicitud supera el límite comercial, requiere aprobación de supervisor de crédito.
+Las excepciones sobre el límite no pueden superar el 20 por ciento sin comité de riesgo.
+El analista debe registrar el motivo de la excepción en el expediente antes de desembolsar.
+Esta política no aplica a productos de tarjeta de crédito empresarial.

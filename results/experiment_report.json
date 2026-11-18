@@ -1,0 +1,236 @@
+{
+  "passed": 20,
+  "total": 20,
+  "overall": 1.0,
+  "grounded_ok": 10,
+  "grounded_total": 10,
+  "abstain_ok": 10,
+  "abstain_total": 10,
+  "rbac_ok": 20,
+  "rbac_total": 20,
+  "suite.grounded": 1.0,
+  "suite.abstain": 1.0,
+  "suite.rbac": 1.0,
+  "details": [
+    {
+      "id": "g01",
+      "role": "analista_credito",
+      "expect": "answered",
+      "ok": true,
+      "reason": "ok",
+      "status": "answered",
+      "citations": [
+        "pol-credito-limite"
+      ],
+      "score": 0.5264
+    },
+    {
+      "id": "g02",
+      "role": "analista_credito",
+      "expect": "answered",
+      "ok": true,
+      "reason": "ok",
+      "status": "answered",
+      "citations": [
+        "pol-credito-scoring"
+      ],
+      "score": 0.4206
+    },
+    {
+      "id": "g03",
+      "role": "analista_credito",
+      "expect": "answered",
+      "ok": true,
+      "reason": "ok",
+      "status": "answered",
+      "citations": [
+        "pol-fraude-alertas"
+      ],
+      "score": 0.4764
+    },
+    {
+      "id": "g04",
+      "role": "soporte",
+      "expect": "answered",
+      "ok": true,
+      "reason": "ok",
+      "status": "answered",
+      "citations": [
+        "sop-soporte-reset"
+      ],
+      "score": 0.5918
+    },
+    {
+      "id": "g05",
+      "role": "soporte",
+      "expect": "answered",
+      "ok": true,
+      "reason": "ok",
+      "status": "answered",
+      "citations": [
+        "sop-soporte-reclamos"
+      ],
+      "score": 0.5009
+    },
+    {
+      "id": "g06",
+      "role": "rrhh",
+      "expect": "answered",
+      "ok": true,
+      "reason": "ok",
+      "status": "answered",
+      "citations": [
+        "pol-rrhh-vacaciones"
+      ],
+      "score": 0.5846
+    },
+    {
+      "id": "g07",
+      "role": "rrhh",
+      "expect": "answered",
+      "ok": true,
+      "reason": "ok",
+      "status": "answered",
+      "citations": [
+        "pol-rrhh-acceso"
+      ],
+      "score": 0.5031
+    },
+    {
+      "id": "g08",
+      "role": "publico",
+      "expect": "answered",
+      "ok": true,
+      "reason": "ok",
+      "status": "answered",
+      "citations": [
+        "faq-productos-publico"
+      ],
+      "score": 0.37
+    },
+    {
+      "id": "g09",
+      "role": "auditor",
+      "expect": "answered",
+      "ok": true,
+      "reason": "ok",
+      "status": "answered",
+      "citations": [
+        "pol-auditoria-logs"
+      ],
+      "score": 0.4202
+    },
+    {
+      "id": "g10",
+      "role": "auditor",
+      "expect": "answered",
+      "ok": true,
+      "reason": "ok",
+      "status": "answered",
+      "citations": [
+        "pol-pld-kyc"
+      ],
+      "score": 0.42
+    },
+    {
+      "id": "a01",
+      "role": "soporte",
+      "expect": "abstained",
+      "ok": true,
+      "reason": "ok",
+      "status": "abstained",
+      "citations": [],
+      "score": 0.079
+    },
+    {
+      "id": "a02",
+      "role": "soporte",
+      "expect": "abstained",
+      "ok": true,
+      "reason": "ok",
+      "status": "abstained",
+      "citations": [],
+      "score": 0.0961
+    },
+    {
+      "id": "a03",
+      "role": "publico",
+      "expect": "abstained",
+      "ok": true,
+      "reason": "ok",
+      "status": "abstained",
+      "citations": [],
+      "score": 0.0327
+    },
+    {
+      "id": "a04",
+      "role": "publico",
+      "expect": "abstained",
+      "ok": true,
+      "reason": "ok",
+      "status": "abstained",
+      "citations": [],
+      "score": 0.1632
+    },
+    {
+      "id": "a05",
+      "role": "rrhh",
+      "expect": "abstained",
+      "ok": true,
+      "reason": "ok",
+      "status": "abstained",
+      "citations": [],
+      "score": 0.1727
+    },
+    {
+      "id": "a06",
+      "role": "analista_credito",
+      "expect": "abstained",
+      "ok": true,
+      "reason": "ok",
+      "status": "abstained",
+      "citations": [],
+      "score": 0.1534
+    },
+    {
+      "id": "a07",
+      "role": "soporte",
+      "expect": "abstained",
+      "ok": true,
+      "reason": "ok",
+      "status": "abstained",
+      "citations": [],
+      "score": 0.2099
+    },
+    {
+      "id": "a08",
+      "role": "analista_credito",
+      "expect": "abstained",
+      "ok": true,
+      "reason": "ok",
+      "status": "abstained",
+      "citations": [],
+      "score": 0.2098
+    },
+    {
+      "id": "l01",
+      "role": "soporte",
+      "expect": "abstained",
+      "ok": true,
+      "reason": "ok",
+      "status": "abstained",
+      "citations": [],
+      "score": 0.261
+    },
+    {
+      "id": "l02",
+      "role": "publico",
+      "expect": "abstained",
+      "ok": true,
+      "reason": "ok",
+      "status": "abstained",
+      "citations": [],
+      "score": 0.0881
+    }
+  ]
+}

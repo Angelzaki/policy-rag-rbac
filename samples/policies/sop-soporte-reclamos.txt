@@ -1,0 +1,8 @@
+SOP-SOPORTE-RECLAMOS · Atención de reclamos (sintético)
+Clasificación: operativa · soporte
+
+Todo reclamo formal debe registrarse con número de ticket en menos de un día hábil.
+El plazo máximo de respuesta al cliente es de 15 días hábiles salvo norma especial.
+Si el reclamo involucra un posible fraude, soporte escala a prevención y no cierra el caso solo.
+Los montos en disputa menores a 100 soles pueden resolverse con nota de crédito previa validación.
+Soporte no decide aprobaciones de crédito ni modifica scores de riesgo.

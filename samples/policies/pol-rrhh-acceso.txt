@@ -1,0 +1,8 @@
+POL-RRHH-ACCESO · Altas y bajas de acceso (sintética)
+Clasificación: interna · rrhh
+
+El alta de accesos de un colaborador nuevo se solicita con 3 días hábiles de anticipación.
+La baja de accesos por cese debe ejecutarse el mismo día de la desvinculación.
+RRHH no otorga permisos sobre sistemas de crédito ni de prevención de fraude.
+Los accesos privilegiados requieren ticket aprobado por el dueño del sistema.
+Las cuentas huérfanas se revisan mensualmente y se desactivan si no hay justificación.

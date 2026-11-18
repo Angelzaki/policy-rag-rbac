@@ -1,0 +1,8 @@
+POL-CREDITO-SCORING · Reglas de scoring interno (sintética)
+Clasificación: restringida · crédito
+
+El score mínimo para desembolso automático es 680 puntos en el modelo interno v3.
+Si el score está entre 620 y 679, el caso pasa a revisión manual del analista.
+Scores menores a 620 se rechazan salvo excepción documentada del jefe de riesgos.
+No se permite recalcular el score omitiendo la consulta a centrales de riesgo.
+El modelo v3 pondera historial de pagos, capacidad de endeudamiento y estabilidad laboral.

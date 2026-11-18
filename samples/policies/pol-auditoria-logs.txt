@@ -1,0 +1,8 @@
+POL-AUDITORIA-LOGS · Conservación de logs de acceso (sintética)
+Clasificación: confidencial · auditoría
+
+Los logs de acceso a sistemas críticos se conservan por un mínimo de 12 meses.
+La alteración o borrado de logs de auditoría constituye incidente de seguridad grave.
+Solo auditoría e infraestructura autorizada pueden exportar logs completos.
+Las consultas de políticas por asistentes internos deben dejar traza de usuario, rol y fuentes citadas.
+Los reportes de auditoría se entregan al comité sin datos personales innecesarios.

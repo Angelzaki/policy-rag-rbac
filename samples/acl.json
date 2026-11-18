@@ -1,0 +1,12 @@
+{
+  "pol-credito-limite": ["analista_credito", "auditor"],
+  "pol-credito-scoring": ["analista_credito", "auditor"],
+  "pol-fraude-alertas": ["analista_credito", "auditor"],
+  "sop-soporte-reset": ["soporte", "auditor"],
+  "sop-soporte-reclamos": ["soporte", "auditor"],
+  "pol-rrhh-vacaciones": ["rrhh", "auditor"],
+  "pol-rrhh-acceso": ["rrhh", "auditor"],
+  "faq-productos-publico": ["publico", "soporte", "analista_credito", "rrhh", "auditor"],
+  "pol-pld-kyc": ["auditor"],
+  "pol-auditoria-logs": ["auditor"]
+}

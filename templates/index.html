@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Policy RAG · RBAC</title>
+  <link href="/static/app.css" rel="stylesheet">
+</head>
+<body>
+  <header class="topbar">
+    <div class="topbar-inner">
+      <div class="brand">
+        <span class="brand-mark" aria-hidden="true"></span>
+        <div>
+          <div class="brand-name">Policy RAG · RBAC</div>
+          <div class="brand-sub">Asistente interno con permisos por rol · datos sintéticos</div>
+        </div>
+      </div>
+      <div class="topbar-actions">
+        <span class="chip chip-ok">{{ doc_count }} políticas · filtro pre-retrieval</span>
+        <form method="post" action="/clear">
+          <button class="btn btn-ghost" type="submit">Limpiar historial</button>
+        </form>
+      </div>
+    </div>
+  </header>
+
+  <main class="page">
+    <section class="kpis" aria-label="Indicadores">
+      <article class="kpi">
+        <div class="kpi-label">Respuestas con evidencia</div>
+        <div class="kpi-value">{{ stats.answered }}</div>
+        <div class="kpi-note">de {{ stats.total }} consultas</div>
+      </article>
+      <article class="kpi">
+        <div class="kpi-label">Tasa de abstención</div>
+        <div class="kpi-value">{{ '%.0f' % (stats.abstain_rate * 100) }}%</div>
+        <div class="kpi-note">{{ stats.abstained }} sin evidencia autorizada</div>
+      </article>
+      <article class="kpi">
+        <div class="kpi-label">RBAC íntegro</div>
+        <div class="kpi-value">{{ '%.0f' % (stats.rbac_rate * 100) }}%</div>
+        <div class="kpi-note">{{ stats.rbac_ok }}/{{ stats.total }} sin filtración</div>
+      </article>
+      <article class="kpi">
+        <div class="kpi-label">Rol más activo</div>
+        <div class="kpi-value kpi-value-sm">{% if stats.roles %}{{ stats.roles[0][0] }}{% else %}—{% endif %}</div>
+        <div class="kpi-note">{% if stats.roles %}{{ stats.roles[0][1] }} consultas{% else %}sin datos{% endif %}</div>
+      </article>
+    </section>
+
+    <div class="grid">
+      <section class="panel">
+        <h1 class="panel-title">Nueva consulta</h1>
+        <form method="post" action="/ask">
+          <label class="field-label" for="role">Rol del solicitante</label>
+          <select id="role" name="role" required>
+            {% for key, meta in roles.items() %}
+            <option value="{{ key }}" {% if role == key %}selected{% endif %}>{{ meta.label }} ({{ key }})</option>
+            {% endfor %}
+          </select>
+          <label class="field-label" for="question">Pregunta</label>
+          <textarea id="question" name="question" rows="5" required placeholder="Ej: ¿Cuál es el límite comercial?">{{ question or '' }}</textarea>
+          <button class="btn btn-primary" type="submit">Consultar con RBAC</button>
+        </form>
+        <p class="hint">El retrieval solo ve documentos autorizados para el rol. Si no hay evidencia en alcance, se abstiene.</p>
+      </section>
+
+      <section class="panel">
+        <h2 class="panel-title">Resultado</h2>
+        {% if result %}
+          <div class="badge {% if result.status == 'answered' %}badge-ok{% elif result.status == 'abstained' %}badge-warn{% else %}badge-danger{% endif %}">
+            {{ result.status }} · rol {{ result.role }} · rbac {% if result.rbac_ok %}ok{% else %}fail{% endif %}
+          </div>
+          <p class="answer">{{ result.answer }}</p>
+          {% if result.citations %}
+          <p class="meta"><strong>Citas:</strong> {{ result.citations | join(', ') }}</p>
+          {% else %}
+          <p class="meta"><strong>Citas:</strong> ninguna (abstención)</p>
+          {% endif %}
+          <p class="meta">score {{ '%.3f' % (result.score or 0) }}{% if result.reason %} · {{ result.reason }}{% endif %}</p>
+          {% if result.allowed_docs %}
+          <p class="meta"><strong>Docs en alcance:</strong> {{ result.allowed_docs | join(', ') }}</p>
+          {% endif %}
+        {% else %}
+          <p class="muted">Aún no hay consulta. Elige un rol y pregunta sobre una política sintética.</p>
+        {% endif %}
+      </section>
+    </div>
+
+    <section class="panel">
+      <h2 class="panel-title">Historial auditado</h2>
+      {% if history %}
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Hora</th>
+            <th>Rol</th>
+            <th>Pregunta</th>
+            <th>Estado</th>
+            <th>Citas</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for row in history %}
+          <tr>
+            <td>{{ row.ts }}</td>
+            <td>{{ row.role }}</td>
+            <td>{{ row.question }}</td>
+            <td>{{ row.status }}</td>
+            <td>{{ (row.citations or []) | join(', ') or '—' }}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+      {% else %}
+      <p class="muted">Sin eventos de auditoría todavía.</p>
+      {% endif %}
+    </section>
+  </main>
+</body>
+</html>

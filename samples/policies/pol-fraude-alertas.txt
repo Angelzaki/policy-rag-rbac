@@ -1,0 +1,8 @@
+POL-FRAUDE-ALERTAS · Manejo de alertas de fraude (sintética)
+Clasificación: restringida · fraude
+
+Toda alerta de fraude de severidad alta debe escalarse al equipo de prevención en menos de 30 minutos.
+Está prohibido compartir el detalle de reglas de detección con canales externos o con soporte de primer nivel.
+Si la alerta involucra un desembolso en curso, el analista debe congelar la operación hasta liberar el hold.
+Los falsos positivos se cierran con código FP-01 y se registran en el log de fraude.
+La lista de indicadores de compromiso de cuenta no se publica en FAQ ni en SOPs de atención.
